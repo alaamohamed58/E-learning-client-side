@@ -107,3 +107,85 @@
     
 })(jQuery);
 
+async function redirectToLogin(event) {
+        event.preventDefault(); // Stop default form submission
+
+        // Gather form data
+        const firstName = document.getElementById("first-name").value.trim();
+        const lastName = document.getElementById("last-name").value.trim();
+        const gender = document.getElementById("gender").value;
+        const role = Number(document.getElementById("role").value);
+        const age = document.getElementById("age").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        const payload = {
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          role,
+          password,
+        };
+
+        try {
+          console.log(JSON.stringify(payload));
+          const response = await fetch(
+            "http://localhost:3000/api/v1/auth/register",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            }
+          );
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Signup successful! Redirecting to login page...");
+            window.location.href = "login.html";
+          } else {
+            alert("Signup failed: " + (data.message || "Unknown error"));
+          }
+        } catch (error) {
+          console.error("Error:", error);
+          alert("An error occurred while registering.");
+        }
+      }
+
+
+
+       async function redirectToProfile(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("http://localhost:3000/api/v1/auth/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        console.log(response)
+        if (response.status === 200) {
+            
+            const data = await response.json();
+            const token = data.accessToken
+            console.log("Login successful! Token:", token);
+
+            localStorage.setItem("authToken", token);
+             window.location.href = "profile.html"; // Redirect to Profile page
+        } else {
+            const result = await response.json();
+            alert(result.message || "Login failed. Please try again.");
+        }
+    } catch (error) {
+        alert("An error occurred: " + error.message);
+    }
+}
+
