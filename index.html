@@ -212,7 +212,7 @@
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://localhost:3000/api/v1/categories", // Adjust API endpoint accordingly
+            url: "http://localhost:3000/api/v1/categories", 
             success: function (categories) {
                 updateCategories(categories);
             },
@@ -302,7 +302,7 @@
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "http://localhost:3000/api/v1/courses", // Adjust the API endpoint accordingly
+            url: "http://localhost:3000/api/v1/courses", 
             success: function (courses) {
                 updateCourses(courses);
             },
