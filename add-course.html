@@ -134,12 +134,12 @@
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label for="upload file" class="form-label">Upload File</label>
+                  <label for="price" class="form-label">Price ($)</label>
                   <input
-                    type="file"
+                    type="number"
                     class="form-control"
-                    id="UploadFile"
-                    placeholder="Upload course file"
+                    id="price"
+                    placeholder="Enter course price"
                     min="0"
                     step="0.01"
                     required
@@ -181,7 +181,7 @@
         // Gather form data
         const title = document.getElementById("title").value.trim();
         const description = document.getElementById("description").value.trim();
-        const UploadFile = parseFloat(document.getElementById("UploadFile").value);
+        const price = parseFloat(document.getElementById("price").value);
         const isActive = document.getElementById("isActive").checked;
         const categoryId = parseInt(
           document.getElementById("categoryId").value
@@ -190,7 +190,7 @@
         const payload = {
           title,
           description,
-          UploadFile,
+          price,
           isActive,
           categoryId,
         };
