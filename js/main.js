@@ -189,3 +189,7 @@ async function redirectToLogin(event) {
     }
 }
 
+function logout() {
+    localStorage.removeItem("authToken");
+    window.location.href = "index.html";
+  }
