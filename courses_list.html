@@ -80,6 +80,7 @@
           <a href="profile.html" class="nav-item nav-link">Home</a>
           <a href="courses_list.html" class="nav-item nav-link active">Courses</a>
           <a href="contact.html" class="nav-item nav-link">Contact</a>
+          <a href="#" class="nav-item nav-link" onclick="logout()">Log out</a>
         </div>
       </div>
     </nav>
@@ -225,7 +226,6 @@
           });
           const courses = await response.json();
           console.log("Courses loaded:", courses);
-          document.getElementById;
           if (!response.ok) {
             throw new Error(courses.message || "Failed to load courses");
           }
