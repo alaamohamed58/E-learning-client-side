@@ -4,32 +4,32 @@
     <meta charset="UTF-8" />
     <title>Profile - eLEARNING</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="shortcut icon" href="img/icons8-e-100.png">
+    <link rel="shortcut icon" href="img/icons8-e-100.png" />
 
-    <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <!-- Fonts and Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-
-    <!-- Libraries Stylesheet -->
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <!-- CSS Libraries -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet" />
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
   </head>
   <body>
-<!-- Spinner Start -->
+    <!-- Spinner -->
     <div
       id="spinner"
       class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
@@ -39,22 +39,16 @@
         style="width: 3rem; height: 3rem"
         role="status"
       >
-        <span class="sr-only">Loading...</span>
+        <span class="visually-hidden">Loading...</span>
       </div>
     </div>
-    <!-- Spinner End -->
 
-       <!-- Navbar Start -->
+    <!-- Navbar -->
     <nav
       class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0"
     >
-      <a
-        href="#"
-        class="navbar-brand d-flex align-items-center px-4 px-lg-5"
-      >
-        <h2 class="m-0 text-primary">
-          <i class="bi bi-pen"></i>E-Learn
-        </h2>
+      <a href="#" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+        <h2 class="m-0 text-primary"><i class="bi bi-pen"></i>E-Learn</h2>
       </a>
       <button
         type="button"
@@ -68,22 +62,22 @@
         <div class="navbar-nav ms-auto p-4 p-lg-0">
           <a href="profile.html" class="nav-item nav-link active">Home</a>
           <a href="courses_list.html" class="nav-item nav-link">Courses</a>
+          <a id="create_course" href="add-course.html" class="nav-item nav-link"
+            >Create Courses</a
+          >
           <a href="contact.html" class="nav-item nav-link">Contact</a>
           <a href="#" class="nav-item nav-link" onclick="logout()">Log out</a>
         </div>
       </div>
     </nav>
-    <!-- Navbar End -->
 
-
-    <!-- Profile Header -->
+    <!-- Header -->
     <div class="container-fluid bg-primary py-5 mb-5 page-header">
       <div class="container text-center text-white">
         <h1 class="display-3">User Profile</h1>
       </div>
     </div>
 
-    <!-- Profile Info -->
     <!-- Profile Info -->
     <div class="container my-5">
       <h2 class="mb-4">Profile Information</h2>
@@ -107,75 +101,158 @@
       </div>
     </div>
 
-    
-
-    <!-- Courses Placeholder -->
+    <!-- My Courses -->
     <div class="container my-5">
       <h2 class="mb-4">My Courses</h2>
       <table class="table table-bordered">
         <thead class="table-light">
           <tr>
             <th>Course Name</th>
-            <th>Status</th>
+            <th>Price</th>
+            <th>Rating</th>
           </tr>
         </thead>
         <tbody id="courses-table">
           <tr>
-            <td colspan="2" class="text-center">Coming soon...</td>
+            <td colspan="4" class="text-center">Loading courses...</td>
           </tr>
         </tbody>
       </table>
     </div>
 
-
-<!-- Scripts -->
-    <script>
-      // Load user profile
-      fetch("http://localhost:3000/api/v1/users/profile", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("authToken"),
-        },
-      })
-        .then((res) => res.json())
-        .then((user) => {
-          document.getElementById("first-name").textContent = user.first_name;
-          document.getElementById("last-name").textContent = user.last_name;
-          document.getElementById("email").textContent = user.email;
-          const profileImage = document.getElementById("profile-image");
-          if (user.profile_image) {
-            profileImage.src = user.profile_image;
-          } else {
-            profileImage.src = "img/male.jpg";
-          }
-        })
-        .catch((err) => {
-          console.error("Failed to load profile:", err);
-          alert("Failed to load profile data.");
-        });
-
-    </script>
-   
     <!-- Footer -->
     <footer class="bg-dark text-white py-4 text-center">
       &copy; 2025 E-Learn. All rights reserved.
     </footer>
 
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"
+      ><i class="bi bi-arrow-up"></i
+    ></a>
 
-
-    <!-- JavaScript Libraries -->
-   <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-
-
-    <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    
 
-    
+    <!-- Custom JS -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        role = localStorage.getItem("role");
+        create_course = document.getElementById("create_course");
+
+        console.log("role:" + role);
+        if (role == 1) {
+          console.log("role: hide");
+          create_course.style.display = "none";
+        } else {
+          console.log("role: show");
+          create_course.style.display = "block";
+        }
+
+        // Load profile
+        fetch("http://localhost:3000/api/v1/users/profile", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        })
+          .then((res) => res.json())
+          .then((user) => {
+            document.getElementById("first-name").textContent = user.first_name;
+            document.getElementById("last-name").textContent = user.last_name;
+            document.getElementById("email").textContent = user.email;
+            document.getElementById("profile-image").src =
+              user.profile_image || "img/male.jpg";
+          });
+
+        // Load My Courses
+        fetch("http://127.0.0.1:3000/api/v1/courses/me", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        })
+          .then((res) => res.json())
+          .then((courses) => {
+            console.log(courses);
+            const table = document.getElementById("courses-table");
+            table.innerHTML = "";
+
+            if (!Array.isArray(courses) || courses.length === 0) {
+              table.innerHTML = `<tr><td colspan="3" class="text-center">No courses found.</td></tr>`;
+              return;
+            }
+
+            courses.forEach((course, index) => {
+              const row = document.createElement("tr");
+              row.innerHTML = `
+              
+
+                <td>${course.title}</td>
+                <td>$${parseFloat(course.price).toFixed(2)}</td>
+                <td id="rating-${index}" data-course-id="${course.id}">
+                  ${renderInteractiveStars(
+                    parseFloat(course.averageRating || 0),
+                    index
+                  )}
+                </td>`;
+              table.appendChild(row);
+            });
+          });
+
+        function renderInteractiveStars(currentRating, index) {
+          let html = "";
+          for (let i = 1; i <= 5; i++) {
+            html += `<i class="fa${
+              i <= currentRating ? "s" : "r"
+            } fa-star text-warning star"
+                        data-index="${index}" data-value="${i}" style="cursor:pointer;"></i>`;
+          }
+          return html;
+        }
+
+        document.addEventListener("click", (e) => {
+          if (e.target.classList.contains("star")) {
+            const index = e.target.dataset.index;
+            const cell = document.getElementById(`rating-${index}`);
+            const courseId = parseInt(cell.dataset.courseId);
+            console.log(cell);
+
+            const input = prompt("Enter your new rating (1-5):");
+            if (input === null) return;
+
+            const rating = parseInt(input.trim());
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+              alert("Invalid rating. Please enter a number between 1 and 5.");
+              return;
+            }
+
+            fetch("http://127.0.0.1:3000/api/v1/courses/rate", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + localStorage.getItem("authToken"),
+              },
+              body: JSON.stringify({ rating, courseId }),
+            })
+              .then((res) => {
+                console.log(JSON.stringify({ rating, courseId }));
+                if (!res.ok) throw new Error("Failed to rate");
+                return res.json();
+              })
+              .then(() => {
+                alert(`Thanks! Your rating of ${rating} has been submitted.`);
+                cell.innerHTML = renderInteractiveStars(rating, index);
+              })
+              .catch((err) => {
+                console.error(err);
+                alert("Failed to submit rating. Try again later.");
+              });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
