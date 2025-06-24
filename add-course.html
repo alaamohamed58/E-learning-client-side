@@ -131,8 +131,8 @@
                   <label for="categoryId" class="form-label">Category</label>
                   <select class="form-select" id="categoryId" required>
                     <option value="" selected disabled>Select category</option>
-                    <option value="2">Basic Design</option>
                   </select>
+                  
                 </div>
                 <div class="mb-3">
                   <label for="price" class="form-label">Price ($)</label>
@@ -199,7 +199,7 @@
         try {
           const token = localStorage.getItem("authToken");
           const response = await fetch(
-            "http://localhost:3000/api/v1/courses", // Adjust this endpoint as needed
+            "http://localhost:3000/api/v1/courses", 
             {
               method: "POST",
               headers: {
@@ -227,6 +227,46 @@
           alert("An error occurred while creating the course.");
         }
       }
+
+
+
+
+
+
+
+
+      document.addEventListener("DOMContentLoaded", () => {
+    fetchCategories();
+  });
+
+  async function fetchCategories() {
+    try {
+      const token = localStorage.getItem("authToken");
+      const response = await fetch("http://localhost:3000/api/v1/categories", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await response.json();
+
+      if (response.ok && Array.isArray(data)) {
+        const select = document.getElementById("categoryId");
+        data.forEach((category) => {
+          const option = document.createElement("option");
+          option.value = category.id;
+          option.textContent = category.name;
+          select.appendChild(option);
+        });
+      } else {
+        console.error("Failed to fetch categories:", data.message || data);
+        alert("Failed to load categories.");
+      }
+    } catch (error) {
+      console.error("Error loading categories:", error);
+      alert("An error occurred while loading categories.");
+    }
+  }
     </script>
 
     <!-- Footer Start -->
